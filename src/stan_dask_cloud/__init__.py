@@ -12,8 +12,8 @@ from src.dask_integration.distributed_models import DistributedStanModel
 from src.models.stan_model import StanModel
 from src.cloud_integration.cloud_setup import CloudSetup
 from src.data_management.stan_file_headers import StanFileHandler
-from src.utils.config import Configuration
-from src.utils.logging import get_logger
+from src.utils.config import Config
+from src.utils.logging import setup_logger
 from src.ray_integration import StanRayExecutor  # New import
 
 # Set up logging for the package
