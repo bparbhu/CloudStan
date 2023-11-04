@@ -1,0 +1,27 @@
+rayHead:
+  replicas: 1
+  serviceType: ClusterIP
+  resources:
+    limits:
+      cpu: "1000m"
+      memory: "1024Mi"
+    requests:
+      cpu: "100m"
+      memory: "512Mi"
+
+rayWorker:
+  replicas: 3
+  resources:
+    limits:
+      cpu: "1000m"
+      memory: "1024Mi"
+    requests:
+      cpu: "100m"
+      memory: "512Mi"
+
+image:
+  repository: rayproject/ray
+  tag: latest
+  pullPolicy: IfNotPresent
+
+# Include other configurations like node selectors, annotations, etc.
