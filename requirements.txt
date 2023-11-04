@@ -9,6 +9,9 @@ dask>=2023.3.0
 distributed>=2023.3.0
 dask-cloudprovider  # For Dask's cloud provider integrations
 
+# Integration with Ray (if you decided to include it)
+ray>=1.0.0
+
 # Cloud providers' SDKs (only include those that you plan to support)
 boto3  # For AWS
 google-cloud-storage  # For GCP
@@ -17,10 +20,6 @@ azure-storage-blob  # For Azure
 # Utilities for data handling and operations
 pandas>=1.0
 numpy>=1.18
-
-# Optional: tools for machine learning and diagnostics with Dask
-dask-ml  # For machine learning with Dask
-dask-diagnostics  # For diagnostics and profiling
 
 # Logging and configuration
 python-dotenv  # For loading environment variables
