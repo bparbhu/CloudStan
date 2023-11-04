@@ -1,28 +1,23 @@
-# stan_dask_cloud/__init__.py
-
 """
-stan_dask_cloud: A Python package for running Stan models using Dask on cloud infrastructure.
+stan_dask_cloud: A Python package for running Stan models using Dask on cloud infrastructure,
+with optional support for Ray as a backend scheduler.
 """
 
 # Version of the stan_dask_cloud package
 __version__ = '0.1.0'
 
-# Import main functionality
-from src.dask_integration.dask_client import DaskClient
+# Import main functionality from submodules
+from src.dask_integration.dask_client import DaskStanClient
 from src.dask_integration.distributed_models import DistributedStanModel
 from src.models.stan_model import StanModel
 from src.cloud_integration.cloud_setup import CloudSetup
-from src.data_management.data_handlers import DataHandler
+from src.data_management.stan_file_headers import StanFileHandler
 from src.utils.config import Configuration
 from src.utils.logging import get_logger
+from src.ray_integration import StanRayExecutor  # New import
 
 # Set up logging for the package
 logger = get_logger()
-
-
-# stan_dask_cloud/__init__.py
-
-# ... other imports and initializations ...
 
 def setup_model(stan_model_code, data, cloud_config, dask_config, model_config=None):
     """
@@ -60,9 +55,6 @@ def setup_model(stan_model_code, data, cloud_config, dask_config, model_config=N
     # Step 6: Return the prepared distributed model ready for fitting
     return distributed_model
 
-
-# Optionally, any initialization code needed for the package can go here
-
 # Make sure to handle imports that should be exposed to the user
 __all__ = [
     'DaskClient',
@@ -72,4 +64,5 @@ __all__ = [
     'DataHandler',
     'Configuration',
     'setup_model',
+    'StanRayExecutor',  # Include the Ray integration class in the public API
 ]
