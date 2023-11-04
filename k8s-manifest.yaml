@@ -1,0 +1,92 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stan-dask-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stan-dask-app
+  template:
+    metadata:
+      labels:
+        app: stan-dask-app
+    spec:
+      containers:
+      - name: stan-app
+        image: your-docker-image # Replace with your Docker image
+        ports:
+        - containerPort: 80 # Replace with your app's port
+        env:
+        - name: DASK_SCHEDULER
+          value: "dask-scheduler:8786" # Replace with your Dask scheduler's service name and port
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: stan-dask-app
+spec:
+  selector:
+    app: stan-dask-app
+  ports:
+  - protocol: TCP
+    port: 80 # Replace with the port you want to expose
+    targetPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: dask-scheduler
+spec:
+  selector:
+    app: dask-scheduler
+  ports:
+  - protocol: TCP
+    port: 8786
+    targetPort: 8786
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dask-scheduler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dask-scheduler
+  template:
+    metadata:
+      labels:
+        app: dask-scheduler
+    spec:
+      containers:
+      - name: dask-scheduler
+        image: daskdev/dask:latest # Use appropriate image
+        args: ["dask-scheduler"]
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dask-worker
+spec:
+  replicas: 3 # Number of workers
+  selector:
+    matchLabels:
+      app: dask-worker
+  template:
+    metadata:
+      labels:
+        app: dask-worker
+    spec:
+      containers:
+      - name: dask-worker
+        image: daskdev/dask:latest # Use appropriate image
+        args: ["dask-worker", "tcp://dask-scheduler:8786"] # Connect to the Dask scheduler service

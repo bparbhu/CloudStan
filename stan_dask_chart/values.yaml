@@ -1,0 +1,23 @@
+# Default values for stan-dask-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+stanApp:
+  replicaCount: 1
+  image:
+    repository: your-repository/stan-app
+    pullPolicy: IfNotPresent
+    tag: "latest"
+
+daskScheduler:
+  image:
+    repository: daskdev/dask
+    pullPolicy: IfNotPresent
+    tag: "latest"
+
+daskWorker:
+  replicaCount: 3
+  image:
+    repository: daskdev/dask
+    pullPolicy: IfNotPresent
+    tag: "latest"
