@@ -23,7 +23,7 @@ RUN pip install --upgrade pip
 
 # Install the required Stan interfaces and their dependencies
 # For CmdStanPy
-RUN pip install cmdstanpy
+RUN RUN pip install --upgrade cmdstanpy[all]
 RUN python -m cmdstanpy.install_cmdstan
 
 # For PyStan (Stan interface for Python, similar to CmdStanPy but different)
