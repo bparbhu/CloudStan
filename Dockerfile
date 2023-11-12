@@ -30,9 +30,6 @@ RUN python -m cmdstanpy.install_cmdstan
 # PyStan requires httpstan, so it will be installed as a dependency
 RUN pip install pystan
 
-# Explicit installation of httpstan, if needed separately
-RUN pip install httpstan
-
 # For BridgeStan
 RUN pip install bridgestan
 
