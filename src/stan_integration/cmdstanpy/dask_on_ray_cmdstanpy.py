@@ -1,10 +1,6 @@
 import dask
-from ray.util.dask import ray_dask_get
 import cmdstanpy
 
-# Ensure Ray is initialized in your environment
-import ray
-ray.init()
 
 def dask_on_ray_wrapper(func, *args, **kwargs):
     """
